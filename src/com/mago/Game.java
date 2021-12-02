@@ -80,6 +80,9 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void render() {
+		// idk why but this makes the input do not lag on linux
+		Toolkit.getDefaultToolkit().sync();
+
 		BufferStrategy bs = this.getBufferStrategy();
 		if (bs == null) {
 			createBufferStrategy(3);
