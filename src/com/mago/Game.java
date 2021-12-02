@@ -15,12 +15,18 @@ public class Game extends Canvas implements Runnable {
 	public static int WIDTH = 120*SCALE;
 	public static int HEIGHT = 160*SCALE;
 
-	private Keyboard keyboard;
+	public static Keyboard keyboard;
 	private Thread thread;
 	public boolean running = false;
 
-//	public BufferedImage layer = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+	// TODO: create enum for states
+	public static final int MENU_STATE = 0;
+	public static final int GAME_STATE = 1;
+	public static Dificulties dificulty = Dificulties.EASY;
+	public static int currentGameState = MENU_STATE;
 
+	// Objects
+	public static Menu menu;
 	public static Player player;
 	public static Enemy enemy;
 	public static Ball ball;
@@ -30,10 +36,14 @@ public class Game extends Canvas implements Runnable {
 		player = new Player((Game.WIDTH/2) - 60/2, HEIGHT-20);
 		enemy = new Enemy((WIDTH/2), 10);
 		ball = new Ball((WIDTH/2), HEIGHT/2);
+		menu = new Menu();
 
 		keyboard = new Keyboard();
 
+		// Event listeners
 		addKeyListener(keyboard);
+		addKeyListener(menu);
+
 		this.setFocusable(true); // very important
 	}
 
@@ -53,11 +63,9 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public synchronized void start() {
-
 		running = true;
 		thread = new Thread(this);
 		thread.start();
-
 	}
 
 	public synchronized void stop() {
@@ -65,7 +73,6 @@ public class Game extends Canvas implements Runnable {
 		try {
 			thread.join();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -73,9 +80,15 @@ public class Game extends Canvas implements Runnable {
 	public void tick(double deltaTime) {
 		keyboard.update();
 		processInput();
-		player.tick(deltaTime);
-		enemy.tick(deltaTime);
-		ball.tick(deltaTime);
+
+		// if the state is the game state
+		if (currentGameState == GAME_STATE) {
+			player.tick(deltaTime);
+			enemy.tick(deltaTime);
+			ball.tick(deltaTime);
+		} else {
+			menu.tick();
+		}
 
 	}
 
@@ -93,9 +106,17 @@ public class Game extends Canvas implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, getWidth(), getHeight());
-		player.render(g);
-		enemy.render(g);
-		ball.render(g);
+
+
+		// if the state is the game state
+		if (currentGameState == GAME_STATE) {
+			player.render(g);
+			enemy.render(g);
+			ball.render(g);
+		} else {
+			menu.render(g);
+		}
+
 
 //		g.drawImage(layer, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
 
@@ -114,21 +135,25 @@ public class Game extends Canvas implements Runnable {
 			delta += (now - lastTime) / ns;
 			lastTime = now;
 			while (delta >= 1) {
-
 				tick(delta);
 				delta--;
 			}
 			render();
 		}
-		// TODO: stop();
+		stop();
 	}
 
-	public synchronized void processInput() {
+	public void processInput() {
 		player.velX = 0;
 		if (keyboard.right) {
-			player.velX = 4;
+			player.velX = 3;
 		} else if (keyboard.left) {
-			player.velX = -4;
+			player.velX = -3;
 		}
+	}
+
+	public static void setDificulty(Dificulties dificulty) {
+		Game.dificulty = dificulty;
+		System.out.println(Game.dificulty);
 	}
 }

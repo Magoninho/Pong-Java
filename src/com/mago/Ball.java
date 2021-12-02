@@ -33,6 +33,8 @@ public class Ball {
 			dx *=-1;
 		} else if (y >= Game.HEIGHT) {
 			// enemy scores
+			System.out.println("Enemy score: " + (++Game.enemy.score));
+
 			generateDirections();
 			Game.player.resetPosition();
 			Game.enemy.resetPosition();
@@ -41,6 +43,7 @@ public class Ball {
 			speed = 2.5;
 		} else if (y < 0) {
 			// player scores
+			System.out.println("Player score: " + (++Game.player.score));
 			generateDirections();
 			Game.enemy.resetPosition();
 			x = Game.WIDTH/2.0;

@@ -8,6 +8,7 @@ public class Player {
 	public float velX = 0;
 	public int width, height;
 	public boolean right, left;
+	public int score = 0;
 
 	public Player(int x, int y) {
 		this.x = x;

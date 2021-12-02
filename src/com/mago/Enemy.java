@@ -8,6 +8,7 @@ public class Enemy {
 
 	public double x, y;
 	public int width, height;
+	public int score = 0;
 
 	public Enemy(int x, int y) {
 		this.x = x;
@@ -17,17 +18,34 @@ public class Enemy {
 	}
 
 	public void tick(double deltaTime) {
-//		x = (Game.ball.x - this.width/2.0) * 0.7;
 
-		if (Game.ball.y < Game.HEIGHT / 2) {
-			if (Game.ball.x - width/2 > x) {
-				x += 4 * deltaTime; // TODO: random
-			}
-			if (Game.ball.x - width/2 < x) {
-				x -= 4 * deltaTime;
-			}
+		switch (Game.dificulty) {
+			case EASY:
+				if (Game.ball.y < Game.HEIGHT / 2.0) {
+					if (Game.ball.x - width / 2.0 > x) {
+						x += 2.5 * deltaTime;
+					}
+					if (Game.ball.x - width / 2.0 < x) {
+						x -= 2.5 * deltaTime;
+					}
+				}
+				break;
+			case MEDIUM:
+				if (Game.ball.y < Game.HEIGHT / 2.0) {
+					if (Game.ball.x - width / 2.0 > x) {
+						x += 4 * deltaTime;
+					}
+					if (Game.ball.x - width / 2.0 < x) {
+						x -= 4 * deltaTime;
+					}
+				}
+				break;
+			case IMPOSSIBLE:
+				x = (Game.ball.x - this.width / 2.0);
+				break;
 		}
 
+		// screen bounds checking
 		if (x+width > Game.WIDTH) {
 			x = Game.WIDTH - width;
 		}
