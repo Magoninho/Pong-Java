@@ -13,7 +13,7 @@ public class Enemy {
 		this.x = x;
 		this.y = y;
 		this.width = 60;
-		this.height = 20;
+		this.height = 10;
 	}
 
 	public void tick(double deltaTime) {
@@ -38,7 +38,7 @@ public class Enemy {
 
 	public void resetPosition() {
 		x = (Game.WIDTH/2) - 30;
-		y = 0;
+		y = 10;
 	}
 
 	public void render(Graphics g) {

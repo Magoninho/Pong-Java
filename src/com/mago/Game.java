@@ -12,8 +12,8 @@ import java.awt.image.BufferedImage;
 public class Game extends Canvas implements Runnable {
 
 	public static int SCALE = 3;
-	public static int WIDTH = 240*SCALE;
-	public static int HEIGHT = 120*SCALE;
+	public static int WIDTH = 120*SCALE;
+	public static int HEIGHT = 160*SCALE;
 
 	private Keyboard keyboard;
 	private Thread thread;
@@ -27,8 +27,8 @@ public class Game extends Canvas implements Runnable {
 
 	public Game() {
 		this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		player = new Player((WIDTH/2) - 30, HEIGHT-20);
-		enemy = new Enemy((WIDTH/2), 0);
+		player = new Player((Game.WIDTH/2) - 60/2, HEIGHT-20);
+		enemy = new Enemy((WIDTH/2), 10);
 		ball = new Ball((WIDTH/2), HEIGHT/2);
 
 		keyboard = new Keyboard();

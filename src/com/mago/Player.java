@@ -13,7 +13,7 @@ public class Player {
 		this.x = x;
 		this.y = y;
 		this.width = 60;
-		this.height = 20;
+		this.height = 10;
 	}
 	public void tick(double deltaTime) {
 		x += velX * deltaTime;
@@ -27,8 +27,8 @@ public class Player {
 	}
 
 	public void resetPosition() {
-		x = (Game.WIDTH/2) - 30;
-		y = Game.HEIGHT-20;
+		x = (Game.WIDTH/2) - this.width/2;
+		y = Game.HEIGHT-this.height - 10;
 	}
 
 	public void render(Graphics g) {

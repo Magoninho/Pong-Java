@@ -38,12 +38,14 @@ public class Ball {
 			Game.enemy.resetPosition();
 			x = Game.WIDTH/2.0;
 			y = Game.HEIGHT/2.0;
+			speed = 2.5;
 		} else if (y < 0) {
 			// player scores
 			generateDirections();
 			Game.enemy.resetPosition();
 			x = Game.WIDTH/2.0;
 			y = Game.HEIGHT/2.0;
+			speed = 2.5;
 		}
 
 		Rectangle bounds = new Rectangle((int)(x+(dx*speed)), (int)(y+(dy*speed)), width, height);
