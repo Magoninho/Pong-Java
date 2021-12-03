@@ -113,6 +113,11 @@ public class Game extends Canvas implements Runnable {
 			player.render(g);
 			enemy.render(g);
 			ball.render(g);
+			g.setColor(Color.WHITE);
+			for (int i = 0; i < WIDTH / 20; i++) {
+				g.fillRect(5 + (i * 20), (HEIGHT/2) - 2, 10, 4);
+			}
+
 		} else {
 			menu.render(g);
 		}
