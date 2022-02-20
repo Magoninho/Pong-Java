@@ -6,7 +6,6 @@ import java.awt.event.KeyListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
 
-import static com.mago.Game.setDificulty;
 import static com.sun.java.accessibility.util.AWTEventMonitor.removeKeyListener;
 
 public class Menu implements KeyListener {
@@ -43,7 +42,7 @@ public class Menu implements KeyListener {
 	public void render(Graphics g) {
 		g.setColor(Color.WHITE);
 		centerString(g, new Rectangle((Game.WIDTH/2), 100, 0, 0), gameTitle, g.getFont().deriveFont(40f));
-		centerString(g, new Rectangle((Game.WIDTH/2), 200, 0, 0), "Select Dificulty:", g.getFont().deriveFont(16f));
+		centerString(g, new Rectangle((Game.WIDTH/2), 200, 0, 0), "Select Difficulty:", g.getFont().deriveFont(16f));
 
 		g.fillRect((Game.WIDTH/3) - 10, ((Game.HEIGHT/2) + selectedOption * 16) - 2, 10, 4);
 		g.fillRect((Game.WIDTH) - (Game.WIDTH/3) - 5, ((Game.HEIGHT/2) + selectedOption * 16) - 2, 10, 4);
@@ -65,7 +64,7 @@ public class Menu implements KeyListener {
 			this.selectedOption = menu2.length-1;
 	}
 
-	public int getSelectedDificulty() {
+	public int getSelectedOption() {
 		return this.selectedOption;
 	}
 
@@ -90,8 +89,8 @@ public class Menu implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			// if the game state is the menu state
 			if (Game.currentGameState == Game.MENU_STATE) {
-				// set the dificulty of the game to be the selected one from this menu
-				Game.setDificulty(Dificulties.values()[getSelectedDificulty()]);
+				// set the difficulty of the game to be the selected one from this menu
+				Game.setDifficulty(Difficulties.values()[getSelectedOption()]);
 				// change the game state to the game to begin
 				Game.currentGameState = Game.GAME_STATE;
 				// remove this key listener

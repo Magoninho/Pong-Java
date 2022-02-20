@@ -1,6 +1,6 @@
 package com.mago;
 
-public enum Dificulties {
+public enum Difficulties {
 	EASY,
 	MEDIUM,
 	IMPOSSIBLE

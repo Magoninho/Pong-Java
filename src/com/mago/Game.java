@@ -4,10 +4,7 @@ import com.mago.input.Keyboard;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
 public class Game extends Canvas implements Runnable {
 
@@ -22,7 +19,7 @@ public class Game extends Canvas implements Runnable {
 	// TODO: create enum for states
 	public static final int MENU_STATE = 0;
 	public static final int GAME_STATE = 1;
-	public static Dificulties dificulty = Dificulties.EASY;
+	public static Difficulties difficulty = Difficulties.EASY;
 	public static int currentGameState = MENU_STATE;
 
 	// Objects
@@ -83,10 +80,12 @@ public class Game extends Canvas implements Runnable {
 
 		// if the state is the game state
 		if (currentGameState == GAME_STATE) {
+			// uptades game entities
 			player.tick(deltaTime);
 			enemy.tick(deltaTime);
 			ball.tick(deltaTime);
 		} else {
+			// updates the menu
 			menu.tick();
 		}
 
@@ -101,7 +100,6 @@ public class Game extends Canvas implements Runnable {
 			createBufferStrategy(3);
 			return;
 		}
-//		Graphics g = layer.getGraphics();
 
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.BLACK);
@@ -157,8 +155,8 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
-	public static void setDificulty(Dificulties dificulty) {
-		Game.dificulty = dificulty;
-		System.out.println(Game.dificulty);
+	public static void setDifficulty(Difficulties difficulty) {
+		Game.difficulty = difficulty;
+		System.out.println(Game.difficulty);
 	}
 }

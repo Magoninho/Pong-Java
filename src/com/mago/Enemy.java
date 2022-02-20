@@ -1,7 +1,5 @@
 package com.mago;
 
-import org.w3c.dom.css.Rect;
-
 import java.awt.*;
 
 public class Enemy {
@@ -19,7 +17,7 @@ public class Enemy {
 
 	public void tick(double deltaTime) {
 
-		switch (Game.dificulty) {
+		switch (Game.difficulty) {
 			case EASY:
 				if (Game.ball.y < Game.HEIGHT / 2.0) {
 					if (Game.ball.x - width / 2.0 > x) {
